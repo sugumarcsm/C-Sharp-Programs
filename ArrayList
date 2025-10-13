@@ -1,0 +1,328 @@
+using System;
+using System.Collections;
+using System.Diagnostics.Tracing;
+using System.Linq;
+
+class Programs
+{
+    public static void Display(ArrayList arr)
+    {
+        Console.WriteLine("----- Display ArrayList -----");
+        Console.WriteLine("Count: " + arr.Count);
+        Console.WriteLine("Capacity: " + arr.Capacity);
+        Console.WriteLine();
+
+        Console.WriteLine("Elements (index : value  (Type)):");
+        for (int i = 0; i < arr.Count; i++)
+        {
+            var item = arr[i];
+            string typeName = item == null ? "null" : item.GetType().Name;
+            // For DateTime, ToString default is fine; for null show "null"
+            string valueText = item == null ? "null" : item.ToString();
+            Console.WriteLine($"{i} : {valueText}  ({typeName})");
+        }
+
+        Console.WriteLine();
+        // Example: first and last index of value 1 (to show duplicates handling)
+        Console.WriteLine("IndexOf(1): " + arr.IndexOf(1));
+        Console.WriteLine("LastIndexOf(1): " + arr.LastIndexOf(1));
+
+        // Example: finding index of "Hello"
+        Console.WriteLine("IndexOf(\"Hello\"): " + arr.IndexOf("Hello"));
+
+        Console.WriteLine("-----------------------------");
+        Console.WriteLine();
+    }
+
+    public static void Main(string[] args)
+    {
+        Console.WriteLine("Collection Practice");
+
+        ArrayList list = new ArrayList();
+        list.Add(1);
+        list.AddRange(new string[] { "sugumar", "sathish", "dinesh", "kavi", "akash", "jai santhosh", "shakthi", "namasivayan" });
+        list.Add(3.14);
+        list.Add(true);
+        list.Add('A');
+        list.Add(DateTime.Now);
+        list.Add(1);
+        list.Add("Hello");
+        list.Add(null);
+        list.Add(100);
+        list.Insert(2, "World");
+
+        // Show full list details
+        Display(list);
+
+        // Extra: only strings from the ArrayList -> sort them safely
+        var onlyStrings = list.OfType<string>().ToList(); // ignores null and non-strings
+        onlyStrings.Sort();
+        Console.WriteLine("Sorted string elements (from ArrayList):");
+        Console.WriteLine(string.Join(", ", onlyStrings));
+
+        // Extra: demonstrate removal of first occurrence of 1
+        Console.WriteLine();
+        Console.WriteLine("Removing first occurrence of 1...");
+        list.Remove(1); // removes first 1
+        Display(list);
+
+
+        Console.WriteLine("\n=== INSERT & INSERTRANGE ===");
+
+        list.Insert(0, "sathish");
+        list.InsertRange(3, new string[] { "arun", "lokesh", "praveen", "balaji" });
+
+        Display(list);
+
+
+        Console.WriteLine("\n=== REMOVE, REMOVEAT, REMOVERANGE ===");
+
+        list.Remove("sathish");
+        list.RemoveAt(4);
+        list.RemoveRange(2, 3);
+        Display(list);
+
+
+        Console.WriteLine("\n=== CONTAINS, INDEXOF, LASTINDEXOF ===");
+        Console.WriteLine("Contains 'Hello':" + list.Contains("Hello));"));
+        Console.WriteLine("IndexOf 'Hello':" + list.IndexOf("Hello"));
+        Console.WriteLine("LastIndexOf (200):" + list.LastIndexOf(100));
+
+        Console.WriteLine("\n=== SORT & REVERSE ===");
+
+        ArrayList numList = new ArrayList() { 5, 3, 8, 1, 2, 3, 7, 4, 6, };
+        Console.WriteLine("Before Sort:");
+        Display(numList);
+        numList.Sort();
+        Console.WriteLine("After Sort:");
+        Display(numList);
+        Console.WriteLine("After Reverse:");
+        numList.Reverse();
+        Display(numList);
+
+
+        Console.WriteLine("\n=== TOARRAY & CLONE ===");
+        object[] arr = list.ToArray();
+        ArrayList copy = (ArrayList)list.Clone();
+        Console.WriteLine("Original List:");
+        Display(list);
+        Console.WriteLine("Cloned Copy:");
+        Display(copy);
+
+        Console.WriteLine("\n=== CLEAR ===");
+        list.Clear();
+        Console.WriteLine("After Clear -> Count: " + list.Count);
+    }
+
+    Console.WriteLine("\n=== COUNT, CAPACITY, TRIMTOSIZE ===");
+        Console.WriteLine($"Count: {list.Count}, Capacity: {list.Capacity}");
+        list.TrimToSize(); // reduce unused memory
+        Console.WriteLine($"After TrimToSize -> Capacity: {list.Capacity}");
+
+       
+    }
+}
+
+//Output
+/* Collection Practice
+----- Display ArrayList -----
+Count: 18
+Capacity: 18
+
+Elements (index : value  (Type)):
+0 : 1  (Int32)
+1 : sugumar  (String)
+2 : World  (String)
+3 : sathish  (String)
+4 : dinesh  (String)
+5 : kavi  (String)
+6 : akash  (String)
+7 : jai santhosh  (String)
+8 : shakthi  (String)
+9 : namasivayan  (String)
+10 : 3.14  (Double)
+11 : True  (Boolean)
+12 : A  (Char)
+13 : 13-10-2025 13:34:34  (DateTime)
+14 : 1  (Int32)
+15 : Hello  (String)
+16 : null  (null)
+17 : 100  (Int32)
+
+IndexOf(1): 0
+LastIndexOf(1): 14
+IndexOf("Hello"): 15
+-----------------------------
+
+Sorted string elements (from ArrayList):
+akash, dinesh, Hello, jai santhosh, kavi, namasivayan, sathish, shakthi, sugumar, World
+
+Removing first occurrence of 1...
+----- Display ArrayList -----
+Count: 17
+Capacity: 18
+
+Elements (index : value  (Type)):
+0 : sugumar  (String)
+1 : World  (String)
+2 : sathish  (String)
+3 : dinesh  (String)
+4 : kavi  (String)
+5 : akash  (String)
+6 : jai santhosh  (String)
+7 : shakthi  (String)
+8 : namasivayan  (String)
+9 : 3.14  (Double)
+10 : True  (Boolean)
+11 : A  (Char)
+12 : 13-10-2025 13:34:34  (DateTime)
+13 : 1  (Int32)
+14 : Hello  (String)
+15 : null  (null)
+16 : 100  (Int32)
+
+IndexOf(1): 13
+LastIndexOf(1): 13
+IndexOf("Hello"): 14
+-----------------------------
+
+
+=== INSERT & INSERTRANGE ===
+----- Display ArrayList -----
+Count: 22
+Capacity: 36
+
+Elements (index : value  (Type)):
+0 : sathish  (String)
+1 : sugumar  (String)
+2 : World  (String)
+3 : arun  (String)
+4 : lokesh  (String)
+5 : praveen  (String)
+6 : balaji  (String)
+7 : sathish  (String)
+8 : dinesh  (String)
+9 : kavi  (String)
+10 : akash  (String)
+11 : jai santhosh  (String)
+12 : shakthi  (String)
+13 : namasivayan  (String)
+14 : 3.14  (Double)
+15 : True  (Boolean)
+16 : A  (Char)
+17 : 13-10-2025 13:34:34  (DateTime)
+18 : 1  (Int32)
+19 : Hello  (String)
+20 : null  (null)
+21 : 100  (Int32)
+
+IndexOf(1): 18
+LastIndexOf(1): 18
+IndexOf("Hello"): 19
+-----------------------------
+
+
+=== REMOVE, REMOVEAT, REMOVERANGE ===
+----- Display ArrayList -----
+Count: 17
+Capacity: 36
+
+Elements (index : value  (Type)):
+0 : sugumar  (String)
+1 : World  (String)
+2 : sathish  (String)
+3 : dinesh  (String)
+4 : kavi  (String)
+5 : akash  (String)
+6 : jai santhosh  (String)
+7 : shakthi  (String)
+8 : namasivayan  (String)
+9 : 3.14  (Double)
+10 : True  (Boolean)
+11 : A  (Char)
+12 : 13-10-2025 13:34:34  (DateTime)
+13 : 1  (Int32)
+14 : Hello  (String)
+15 : null  (null)
+16 : 100  (Int32)
+
+IndexOf(1): 13
+LastIndexOf(1): 13
+IndexOf("Hello"): 14
+-----------------------------
+
+
+=== CONTAINS, INDEXOF, LASTINDEXOF ===
+Contains 'Hello':False
+IndexOf 'Hello':14
+LastIndexOf (200):16
+
+=== SORT & REVERSE ===
+Before Sort:
+----- Display ArrayList -----
+Count: 9
+Capacity: 16
+
+Elements (index : value  (Type)):
+0 : 5  (Int32)
+1 : 3  (Int32)
+2 : 8  (Int32)
+3 : 1  (Int32)
+4 : 2  (Int32)
+5 : 3  (Int32)
+6 : 7  (Int32)
+7 : 4  (Int32)
+8 : 6  (Int32)
+
+IndexOf(1): 3
+LastIndexOf(1): 3
+IndexOf("Hello"): -1
+-----------------------------
+
+After Sort:
+----- Display ArrayList -----
+Count: 9
+Capacity: 16
+
+Elements (index : value  (Type)):
+0 : 1  (Int32)
+1 : 2  (Int32)
+2 : 3  (Int32)
+3 : 3  (Int32)
+4 : 4  (Int32)
+5 : 5  (Int32)
+6 : 6  (Int32)
+7 : 7  (Int32)
+8 : 8  (Int32)
+
+IndexOf(1): 0
+LastIndexOf(1): 0
+IndexOf("Hello"): -1
+-----------------------------
+
+After Reverse:
+----- Display ArrayList -----
+Count: 9
+Capacity: 16
+
+Elements (index : value  (Type)):
+0 : 8  (Int32)
+1 : 7  (Int32)
+2 : 6  (Int32)
+3 : 5  (Int32)
+4 : 4  (Int32)
+5 : 3  (Int32)
+6 : 3  (Int32)
+7 : 2  (Int32)
+8 : 1  (Int32)
+
+IndexOf(1): 8
+LastIndexOf(1): 8
+IndexOf("Hello"): -1
+-----------------------------
+
+
+=== COUNT, CAPACITY, TRIMTOSIZE ===
+Count: 17, Capacity: 36
+After TrimToSize -> Capacity: 17
+*/
