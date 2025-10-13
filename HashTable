@@ -1,0 +1,59 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace CollectionsPradice
+{
+     class HashTablePradice
+    {
+        public static void Main(string[] args)
+        {
+            Hashtable ht = new Hashtable();
+            ht.Add(1, "sugumar");
+            ht.Add(2,"sathish");
+            ht.Add(3, "Arun");
+            ht.Add(4, "Lokesh");
+            ht.Add(5, "praveen");
+
+            Console.WriteLine("Hash table Element: ");
+            foreach(DictionaryEntry  item in ht)
+            {
+
+                Console.WriteLine($"{item.Key}:{item.Value}");
+            }
+
+            //Access Key and Values in spareatly
+
+            Console.WriteLine("\n keys");
+            foreach(var key in ht.Keys)
+            {
+                Console.WriteLine(key);
+            }
+
+            Console.WriteLine("\n Values");
+            foreach (var value in ht.Values)
+            {
+                Console.WriteLine(value);
+            }
+            Console.WriteLine($"\nContains key 2? {ht.ContainsKey(22)}");
+            Console.WriteLine($"\n Contains values sugumar ? {ht.ContainsValue("sugumar")}");
+
+            // Remove a key
+            ht.Remove(2);
+            Console.WriteLine("\n After remove a key.");
+            foreach (DictionaryEntry item in ht)
+            {
+                Console.WriteLine($"{item.Key}: {item.Value}");
+            }
+
+
+            //Clear all
+            ht.Clear();
+            Console.WriteLine($"\n After Clear -> count : {ht.Count}");
+        }
+    }
+}
+
