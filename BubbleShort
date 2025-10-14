@@ -1,0 +1,65 @@
+using System;
+
+class Program
+{
+    public static void Main(string[] args)
+    {
+        int[] arr = { 10, 1, 6, 54, 99, 45 };
+        string[] names = {"sugumar","sathish","Kumar","Arun","Bala"};
+        // Call the method
+        BubbleSortNum(arr);
+        BubbleSortString(names);
+
+        // Display the sorted array
+        Console.WriteLine("Sorted Array:");
+        foreach (int i in arr)
+        {
+            Console.Write(i + " ");
+        }
+        Console.WriteLine("\n Sorted Names: ");
+            foreach(string name in names)
+        {
+            Console.Write(name + " ");
+        }
+    }
+
+    // Bubble Sort Method
+    static void BubbleSortString(string[] arr)
+    {
+        string temp = "";
+        for (int i = 0; i < arr.Length - 1; i++)
+        {
+            for (int j = 0; j < arr.Length - 1 - i; j++)
+            {
+                if (string.Compare(arr[j], arr[j + 1]) > 0)
+                {
+                    temp = arr[j];
+                    arr[j] = arr[j + 1];
+                    arr[j + 1] = temp;
+                }
+            }
+            {
+                
+            }
+        }
+        {
+
+        }
+    }
+    static void BubbleSortNum(int[] arr)
+    {
+        int temp = 0;
+        for (int i = 0; i < arr.Length - 1; i++)
+        {
+            for (int j = 0; j < arr.Length - 1 - i; j++)
+            {
+                if (arr[j] > arr[j + 1])
+                {
+                    temp = arr[j];
+                    arr[j] = arr[j + 1];
+                    arr[j + 1] = temp;
+                }
+            }
+        }
+    }
+}
