@@ -1,0 +1,45 @@
+using System;
+using System.Linq;
+
+namespace ArrayGeneric
+{
+    internal class MergeShort
+    {
+        public static void Main(string[] args)
+        {
+            int[] arr = { 10, 1, 6, 54, 99, 45 };
+            arr = MergeSort(arr);
+            Console.WriteLine(string.Join(", ", arr));
+        }
+
+        public static int[] MergeSort(int[] arr)
+        {
+            if (arr.Length < 2) return arr;
+
+            int mid = arr.Length / 2;
+            int[] left = MergeSort(arr.Take(mid).ToArray());
+            int[] right = MergeSort(arr.Skip(mid).ToArray());
+            return Merge(left, right);
+        }
+
+        static int[] Merge(int[] left, int[] right)
+        {
+            int[] joined = new int[left.Length + right.Length];
+            int i = 0, j = 0, k = 0;
+
+            while (i < left.Length && j < right.Length)
+            {
+                joined[k++] = (left[i] < right[j]) ? left[i++] : right[j++];
+            }
+            while (i < left.Length)
+            {
+                joined[k++] = left[i++];
+            }
+            while (j < right.Length)
+            {
+                joined[k++] = right[j++];
+            }
+            return joined;
+        }
+    }
+}
