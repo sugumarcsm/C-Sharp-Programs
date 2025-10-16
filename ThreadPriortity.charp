@@ -1,0 +1,39 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Therdingexample
+{
+    internal class ThreadPriortity
+    {
+
+        static void Main(string[] args)
+        {
+            Thread t1 = new Thread(Job);
+            Thread t2 = new Thread(Job);
+            Thread t3 = new Thread(Job);
+
+            t1.Name = "Low Priority Thread";
+            t2.Name = "High Priority Thread";
+            t3.Name = "Medium Priorty Thread";
+
+            t1.Priority = ThreadPriority.Lowest;
+            t2.Priority = ThreadPriority.Highest;
+            t3.Priority = ThreadPriority.Normal;
+
+            t1.Start();
+            t2.Start();
+            t3.Start();
+        }
+
+        static void Job()
+        {
+            for (int i = 1; i <= 5; i++)
+            {
+                Console.WriteLine($"{Thread.CurrentThread.Name} - Count {i}");
+            }
+        }
+    }
+}
