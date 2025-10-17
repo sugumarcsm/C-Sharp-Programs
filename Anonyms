@@ -1,1 +1,37 @@
 
+using System;
+
+// Step 1: Declare a delegate
+delegate int SquareDelegate(int x);
+
+class Program
+{
+    // Step 2: Normal method
+    public static int SquareNormal(int x)
+    {
+        return x * x;
+    }
+
+    static void Main()
+    {
+        // ===== Using Normal Method =====
+        SquareDelegate square1 = SquareNormal;
+        int result1 = square1(5);
+        Console.WriteLine("Square of 5 using normal method: " + result1);
+
+        // ===== Using Anonymous Method =====
+        SquareDelegate square2 = delegate (int x)
+        {
+            return x * x;
+        };
+        int result2 = square2(6);
+        Console.WriteLine("Square of 6 using anonymous method: " + result2);
+
+        // ===== Using Lambda Expression =====
+        SquareDelegate square3 = x => x * x;
+        int result3 = square3(7);
+        Console.WriteLine("Square of 7 using lambda expression: " + result3);
+
+        Console.ReadLine();
+    }
+}
