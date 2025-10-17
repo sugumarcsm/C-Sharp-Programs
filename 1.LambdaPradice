@@ -1,0 +1,29 @@
+
+    internal class LambdaPradice
+    {
+        static void Main(string[] args)
+        {
+            //  An anonymous type lets you create an object without defining a class.
+            //  Its type is inferred by the compiler.
+            //  Useful for temporary storage or grouping data.
+            
+            var student = new { Name = "Sugumar", Age = 21, Marks = 85 };
+            var student2 = new { Name = "Kumar", Age = 21, Marks = 77 };
+
+
+            Action<dynamic> printStudent = s =>
+            {
+                Console.WriteLine("========= Student Ditails ===========");
+                Console.WriteLine(s);
+                
+                Console.WriteLine("Name: " + student.Name);
+                Console.WriteLine("Age: " + student.Age);
+                Console.WriteLine("Marks: " + student.Marks);
+            };
+
+            printStudent(student);
+            printStudent(student2);
+
+        }
+    }
+}
