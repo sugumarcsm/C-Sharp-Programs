@@ -1,0 +1,39 @@
+using System;
+
+namespace IndexersPradice
+{
+    class Distance
+    {
+        private int num1;
+        private int num2;
+
+        public Distance(int num1, int num2)   // constructor must be public
+        {
+            this.num1 = num1;
+            this.num2 = num2;
+        }
+
+        // Operator overloading
+        public static Distance operator +(Distance a, Distance b)
+        {
+            return new Distance(a.num1 + b.num1, a.num2 + b.num2);
+        }
+
+        public void display()
+        {
+            Console.WriteLine($"{num1} , {num2}");
+        }
+    }
+
+    internal class Operator
+    {
+        public static void Main(string[] args)
+        {
+            Distance d1 = new Distance(33, 88);
+            Distance d2 = new Distance(66, 9);
+            Distance d3 = d1 + d2;
+
+            d3.display();   // Output: 99 , 97
+        }
+    }
+}
