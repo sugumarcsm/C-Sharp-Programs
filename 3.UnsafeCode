@@ -1,0 +1,20 @@
+using System;
+
+class ArrayPointer
+{
+    static unsafe void Main(string[] args)
+    {
+        int[] arr = { 10, 2, 30 };
+
+        // fixed block pins array in memory
+        fixed (int* ptr = arr)
+        {
+            for (int i = 0; i < arr.Length; i++)
+            {
+                Console.WriteLine($"Element {i}: Value = {*(ptr + i)}, Address = {(long)(ptr + i):X}");
+            }
+        }
+
+        Console.ReadKey();
+    }
+}
