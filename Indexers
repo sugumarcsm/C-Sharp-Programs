@@ -1,0 +1,77 @@
+using System;
+
+namespace IndexersPractice
+{
+    class Student
+    {
+        private string[] names;
+
+        // Constructor
+        public Student(int size = 6) // default size = 6
+        {
+            names = new string[size];
+            for (int i = 0; i < names.Length; i++)
+            {
+                names[i] = "No Name";
+            }
+        }
+
+        // Indexer with bounds checking
+        public string this[int index]
+        {
+            get
+            {
+                if (index < 0 || index >= names.Length)
+                    throw new IndexOutOfRangeException("Invalid index");
+                return names[index];
+            }
+            set
+            {
+                if (index < 0 || index >= names.Length)
+                    throw new IndexOutOfRangeException("Invalid index");
+                names[index] = value;
+            }
+        }
+
+        // Property to get the total number of students
+        public int Count => names.Length;
+
+        // Optional: Add a method to display all names
+        public void DisplayAll()
+        {
+            for (int i = 0; i < names.Length; i++)
+            {
+                Console.WriteLine($"Student[{i}] = {names[i]}");
+            }
+        }
+    }
+
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            Student student = new Student(); // default 6 students
+
+            // Assigning names using indexer
+            student[0] = "John";
+            student[1] = "Doe";
+            student[2] = "Smith";
+            student[3] = "Jane";
+            student[4] = "Brown";
+            student[5] = "Sugumar";
+
+            Console.WriteLine("Student Names:");
+            student.DisplayAll();
+
+            // Demonstrating indexer exception handling
+            try
+            {
+                student[6] = "Invalid"; // This will throw exception
+            }
+            catch (IndexOutOfRangeException ex)
+            {
+                Console.WriteLine($"Error: {ex.Message}");
+            }
+        }
+    }
+}
