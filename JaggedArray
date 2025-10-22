@@ -1,0 +1,38 @@
+
+class JaggedArrayExample
+{
+    public static void Main(string[] args)
+    {
+        Console.Write("Enter number of rows: ");
+        int rows = int.Parse(Console.ReadLine());
+        int[][] arr = new int[rows][];
+
+        // Input for each row
+        for (int i = 0; i < rows; i++)
+        {
+            Console.Write($"Enter number of elements for row {i}: ");
+            int col = int.Parse(Console.ReadLine());
+            arr[i] = new int[col];
+
+            Console.WriteLine($"Enter {col} elements for row {i}:");
+
+            for (int j = 0; j < col; j++)
+            {
+                arr[i][j] = int.Parse(Console.ReadLine());
+            }
+
+        }
+
+        //Dispaly Jugged Array
+        Console.WriteLine("The jagged array is :");
+
+        for (int i = 0; i < arr.Length; i++) {
+            for (int j = 0; j < arr[i].Length; j++)
+            {
+
+                Console.Write(arr[i][j] + " ");
+
+            }
+            Console.WriteLine();
+    }
+    } }
