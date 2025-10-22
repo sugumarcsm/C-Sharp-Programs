@@ -1,0 +1,48 @@
+using SolidPrinciples;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace SolidPrinciples
+{
+
+    //1 Employee class handle salary only
+    class Emplayee
+    {
+        public string Name { get; set; }
+        public double Salary { get; set; }
+
+        public void CalculateSalary()
+        {
+            //Salary calculation logic
+            Console.WriteLine($"{Name}'s salary is {Salary}");
+
+        }
+    }
+    // 2️⃣ EmployeeRepository class handles database only
+    class EmployeeRepository
+    {
+        public void SaveEmployee(Emplayee employee)
+        {
+            Console.WriteLine($"Employee {employee.Name} saved to database.");
+
+        }
+        
+        }
+    }
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+
+        Emplayee emp = new Emplayee { Name = "sugumar", Salary = 2500000 };
+
+        emp.CalculateSalary();
+
+        EmployeeRepository repo = new EmployeeRepository();
+        repo.SaveEmployee(emp);
+        }
+    }
+
