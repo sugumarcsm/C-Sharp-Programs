@@ -1,0 +1,75 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace SolidPrinciples
+{
+    interface Ishap
+    {
+        double CalculateAre();
+        string GetshapName();
+
+    }
+
+    class Circule : Ishap
+    {
+        public double Redious { get; set; }
+
+        public Circule(double redious)
+        {
+
+            Redious = redious;
+
+        }
+        public double CalculateAre()
+        {
+            return Redious * Redious;
+        }
+        public String GetshapName()
+        {
+            return "Circular";
+        }
+    }
+
+    class Rectangle : Ishap
+    {
+
+        public double Length { get; set; }
+        public double Breath { get; set; }
+
+        public Rectangle(double length,double breath)
+        {
+            Length = length;
+            Breath = breath;
+        }
+        public double CalculateAre()
+        {
+            return Length * Breath;
+        }
+        public string GetshapName()
+        {
+            return "Rectangle";
+        }
+    }
+
+    internal class OCPExcample
+    {
+        public static void Main(string[] args)
+        {
+            var shap = new List<Ishap>()
+            {
+                new Circule(5),
+                new Rectangle(10,9)
+
+            };
+
+            foreach(var sh in shap)
+            {
+                Console.WriteLine($"Area of {sh.GetshapName()}:{sh.CalculateAre()}");
+            }
+        }
+    }
+}
+
