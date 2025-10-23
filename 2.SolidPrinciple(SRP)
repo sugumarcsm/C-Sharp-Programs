@@ -1,0 +1,78 @@
+using SolidPrinciples;
+using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.IO;
+
+namespace SolidPrinciples
+{
+
+    class Product
+    {
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public string price { get; set; }
+
+        public Product(int id,string name,string price)
+        {
+            Id = id;
+            Name = name;
+            this.price = price;
+        }
+
+    }
+
+    class DisplayProduct
+    {
+
+        public void DisplayProductDetails(Product product)
+        {
+            Console.WriteLine(product.GetType().Name + "-------------Details: -------------");
+            Console.WriteLine($"\n Product Id:{product.Id},\n Product Name:{product.Name},\n Product Price:{product.price}");
+            Console.WriteLine("-----------------------------------------------------------------------------------");
+            Console.WriteLine();
+        }
+    }
+    class ProductFileSaver
+    {
+        public void saveToFile(Product product)
+        {
+            //Code to save product details to a file
+
+            string data = $"Product Id:{product.Id}, Product Name:{product.Name},Product Price:{product.price}";
+            File.WriteAllText("product.txt", data);
+            Console.WriteLine("Product details saved successfully to product.txt");
+
+        }
+    }
+
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            //Creaing Object of Product class
+            Product product1 = new Product(1, "Laptop", "50000");
+            Product product2 = new Product(2, "Mobile", "20000");
+
+            //Displaying Product Details
+            DisplayProduct displayProduct1 = new DisplayProduct();
+            DisplayProduct displayProduct2= new DisplayProduct();
+
+            displayProduct1.DisplayProductDetails(product1);
+            displayProduct2.DisplayProductDetails(product2);
+
+            //Saving Product Details to a file
+            ProductFileSaver fileSaver1 = new ProductFileSaver();
+            ProductFileSaver fileSaver2= new ProductFileSaver();
+
+            fileSaver1.saveToFile(product1);
+            fileSaver2.saveToFile(product2);
+
+            Console.WriteLine("Product succesfully");
+        }
+    }
+    }
+
