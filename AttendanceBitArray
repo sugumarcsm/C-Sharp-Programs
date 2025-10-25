@@ -1,0 +1,53 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ConsoleApp2
+{
+    internal class Attendance
+    {
+        static void Main(string[] args)
+        {
+            int totalStudents = 5;
+            BitArray attendance = new BitArray(totalStudents);
+
+            Console.WriteLine("Enter attendance for 5 students (1 = Present, 0 = Absent):");
+
+            // Step 1: Input attendance
+            for (int i = 0; i < totalStudents; i++)
+            {
+                Console.Write($"Student {i + 1}: ");
+                string input = Console.ReadLine();
+
+                if (input == "1")
+                    attendance[i] = true;
+                else
+                    attendance[i] = false;
+            }
+
+            // Step 2: Display individual attendance
+            Console.WriteLine("\nIndividual Attendance:");
+            for (int i = 0; i < totalStudents; i++)
+            {
+                string status = attendance[i] ? "Present" : "Absent";
+                Console.WriteLine($"Student {i + 1}: {status}");
+            }
+
+            // Step 3: Count total present & absent
+            int presentCount = 0;
+            for (int i = 0; i < totalStudents; i++)
+            {
+                if (attendance[i])
+                    presentCount++;
+            }
+            int absentCount = totalStudents - presentCount;
+
+            // Step 4: Print summary
+            Console.WriteLine($"\nTotal Present: {presentCount}");
+            Console.WriteLine($"Total Absent: {absentCount}");
+        }
+    }
+}
